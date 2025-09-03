@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuevas Profesiones Digitales</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8;
-            color: #1e293b;
+            background: linear-gradient(135deg, #1A202C 0%, #2D3748 100%);
+            color: #E2E8F0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,9 +24,9 @@
             max-width: 1200px;
             max-height: 800px;
             position: relative;
-            background-color: #ffffff;
+            background-color: #171923;
             border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             padding: 3rem;
             display: flex;
             flex-direction: column;
@@ -40,7 +40,7 @@
             align-items: center;
             text-align: center;
             opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            transition: opacity 0.7s ease-in-out;
             padding: 2rem;
         }
         .slide.active {
@@ -52,22 +52,26 @@
             text-align: left;
         }
         h1 {
-            font-size: 3rem;
-            font-weight: 700;
+            font-size: 4rem;
+            font-weight: 800;
             margin-bottom: 1rem;
-            color: #2563eb;
+            background: linear-gradient(45deg, #4299E1, #9F7AEA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             line-height: 1.2;
+            text-shadow: 0 4px 15px rgba(66, 153, 225, 0.4);
         }
         h2 {
-            font-size: 2.25rem;
-            font-weight: 600;
+            font-size: 2.5rem;
+            font-weight: 700;
             margin-bottom: 1.5rem;
-            color: #1e293b;
+            color: #CBD5E0;
         }
         p, li {
             font-size: 1.125rem;
             line-height: 1.7;
             margin-bottom: 1rem;
+            color: #A0AEC0;
         }
         ul {
             list-style: none;
@@ -77,38 +81,58 @@
         .key-message {
             margin-top: 2rem;
             padding: 1.5rem;
-            background-color: #e0f2fe;
-            border-left: 5px solid #3b82f6;
+            background-color: #2D3748;
+            border-left: 5px solid #4299E1;
             border-radius: 8px;
             font-weight: 600;
             font-style: italic;
+            color: #E2E8F0;
         }
         .data-point {
-            background-color: #f1f5f9;
+            background-color: #2D3748;
             padding: 1rem;
             border-radius: 12px;
             margin-bottom: 1rem;
             font-size: 1rem;
+            color: #A0AEC0;
         }
         .inspiration-card {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            background-color: #f8fafc;
+            background-color: #2D3748;
             padding: 1.5rem;
             border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .inspiration-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background-color: #2C3540;
         }
         .inspiration-card h3 {
             font-weight: 700;
             font-size: 1.5rem;
-            color: #2563eb;
+            background: linear-gradient(45deg, #4299E1, #9F7AEA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-top: 1rem;
         }
         .inspiration-card p {
             font-size: 1rem;
-            color: #64748b;
+            color: #A0AEC0;
+        }
+        .icon {
+            font-size: 2rem;
+            width: 4rem;
+            height: 4rem;
+            background-color: #4A5568;
+            color: #E2E8F0;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .data-vis {
             display: flex;
@@ -127,19 +151,21 @@
             width: 150px;
             flex-shrink: 0;
             text-align: right;
+            color: #E2E8F0;
         }
         .data-bar {
             flex-grow: 1;
             height: 2rem;
             border-radius: 9999px;
-            background-color: #e2e8f0;
+            background-color: #4A5568;
             position: relative;
             overflow: hidden;
         }
         .data-bar-fill {
             height: 100%;
             border-radius: 9999px;
-            transition: width 1s ease-out;
+            transition: width 1s cubic-bezier(0.25, 1, 0.5, 1);
+            background: linear-gradient(90deg, #4299E1, #9F7AEA);
         }
         .data-bar-text {
             position: absolute;
@@ -147,7 +173,7 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 0.875rem;
-            font-weight: 600;
+            font-weight: 700;
             color: white;
             z-index: 10;
         }
@@ -156,6 +182,8 @@
             bottom: 2rem;
             display: flex;
             gap: 1rem;
+            justify-content: center;
+            width: 100%;
         }
         .nav-button {
             padding: 0.75rem 2rem;
@@ -163,19 +191,42 @@
             font-weight: 600;
             border-radius: 9999px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+            border: none;
         }
         .nav-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
         #prevBtn {
-            background-color: #cbd5e1;
-            color: #475569;
+            background-color: #4A5568;
+            color: #E2E8F0;
         }
         #nextBtn {
-            background-color: #2563eb;
+            background-color: #4299E1;
             color: #ffffff;
+            font-weight: 700;
+        }
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+        .modal-content {
+            background-color: #171923;
+            color: #E2E8F0;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
         }
     </style>
 </head>
@@ -185,11 +236,11 @@
         <!-- Slide 1: Portada -->
         <div id="slide1" class="slide active">
             <div class="flex flex-col items-center">
-                <h1 class="text-6xl text-center text-blue-600">Nuevas Profesiones Digitales</h1>
-                <p class="text-3xl text-gray-700 mt-4 text-center">Un Nuevo Mundo Laboral en Colombia</p>
+                <h1 class="text-7xl text-center">Nuevas Profesiones Digitales</h1>
+                <p class="text-3xl text-gray-400 mt-4 text-center">Un Nuevo Mundo Laboral en Colombia</p>
                 <div class="mt-12 text-center text-xl text-gray-500">
                     <p>Una Presentación de:</p>
-                    <p class="font-semibold text-gray-800 mt-2">Nicolás Cuervo, Jacobo Ramírez, Daniel Páez, Gael Serrano</p>
+                    <p class="font-bold text-gray-300 mt-2">Nicolás Cuervo, Jacobo Ramírez, Daniel Páez, Gael Serrano</p>
                 </div>
             </div>
         </div>
@@ -197,11 +248,11 @@
         <!-- Slide 2: Objetivo -->
         <div id="slide2" class="slide">
             <div class="slide-content">
-                <h2 class="text-4xl text-blue-600">Objetivo: ¿Qué está pasando?</h2>
+                <h2 class="text-4xl">Objetivo: ¿Qué está pasando?</h2>
                 <p>El mundo laboral en Colombia ha cambiado. Hoy, muchos jóvenes ya no sueñan solo con ser médicos o ingenieros, sino con ser <b>creadores digitales</b>.</p>
-                <ul class="list-disc pl-5 mt-4 text-gray-700">
-                    <li><span class="font-semibold">Dato clave:</span> En 2025, Colombia tendrá <b>36.8 millones de usuarios</b> de redes sociales (69.2% de la población).</li>
-                    <li><span class="font-semibold">Dato clave:</span> TikTok ya reúne a <b>32 millones de usuarios adultos</b> en Colombia, equivalente al 79.5% de esa población.</li>
+                <ul class="list-disc pl-5 mt-4 text-gray-400">
+                    <li><span class="font-bold">Dato clave:</span> En 2025, Colombia tendrá <b>36.8 millones de usuarios</b> de redes sociales (69.2% de la población).</li>
+                    <li><span class="font-bold">Dato clave:</span> TikTok ya reúne a <b>32 millones de usuarios adultos</b> en Colombia, equivalente al 79.5% de esa población.</li>
                 </ul>
                 <div class="key-message">
                     <p>👉 Mensaje para docentes: Sus estudiantes ya están en estas plataformas. La pregunta no es si deben orientarlos hacia ellas, sino <b>cómo ayudarlos a hacerlo de manera responsable y profesional.</b></p>
@@ -212,16 +263,16 @@
         <!-- Slide 3: Iluminación -->
         <div id="slide3" class="slide">
             <div class="slide-content">
-                <h2 class="text-4xl text-blue-600">Iluminación: Revelando lo que no se veía</h2>
+                <h2 class="text-4xl">Iluminación: Revelando lo que no se veía</h2>
                 <p>Estas profesiones en Colombia no son solo entretenimiento: son una <b>economía formal en crecimiento</b>.</p>
                 <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="data-point">
                         <p class="font-bold text-lg">Economía de Creadores</p>
-                        <p class="text-gray-600">Más de <b>645,000 creadores</b> e influencers en Colombia generan <b>400,000 empleos</b> y representan el <b>1.5% del PIB nacional</b>.</p>
+                        <p class="text-gray-400">Más de <b>645,000 creadores</b> e influencers en Colombia generan <b>400,000 empleos</b> y representan el <b>1.5% del PIB nacional</b>.</p>
                     </div>
                     <div class="data-point">
                         <p class="font-bold text-lg">Inversión en la Industria</p>
-                        <p class="text-gray-600">En 2023, esta industria movió más de <b>$117,563 millones de pesos</b>, y para 2025 se espera que alcance los <b>$74.6 millones USD</b> en inversión publicitaria.</p>
+                        <p class="text-gray-400">En 2023, esta industria movió más de <b>$117,563 millones de pesos</b>, y para 2025 se espera que alcance los <b>$74.6 millones USD</b> en inversión publicitaria.</p>
                     </div>
                 </div>
                 <div class="key-message">
@@ -233,25 +284,25 @@
         <!-- Slide 4: Compromiso -->
         <div id="slide4" class="slide">
             <div class="slide-content">
-                <h2 class="text-4xl text-blue-600">Compromiso: Conexión emocional</h2>
+                <h2 class="text-4xl">Compromiso: Conexión emocional</h2>
                 <p>Los docentes son guías clave para que los jóvenes no solo sueñen con ser creadores digitales, sino que aprendan a:</p>
-                <ul class="list-disc pl-5 mt-4 text-gray-700">
+                <ul class="list-disc pl-5 mt-4 text-gray-400">
                     <li>Profesionalizar su talento (ej. estudiar comunicación, marketing, producción audiovisual).</li>
                     <li>Gestionar estas carreras como emprendimientos reales.</li>
                 </ul>
                 <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="inspiration-card">
-                        <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center text-3xl text-blue-600 font-bold">📚</div>
+                        <div class="icon">📚</div>
                         <h3>Julioprofe</h3>
                         <p>4.5 millones de suscriptores, reconocido por el BID como ejemplo educativo innovador.</p>
                     </div>
                     <div class="inspiration-card">
-                        <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center text-3xl text-blue-600 font-bold">🌟</div>
+                        <div class="icon">🌟</div>
                         <h3>Ami Rodríguez</h3>
                         <p>Primer YouTuber colombiano en llegar a 10 millones, hoy con 29.1 millones de suscriptores.</p>
                     </div>
                     <div class="inspiration-card">
-                        <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center text-3xl text-blue-600 font-bold">👨‍🌾</div>
+                        <div class="icon">👨‍🌾</div>
                         <h3>El Borrego</h3>
                         <p>Canal de vida rural con 27 millones de suscriptores y 6.5 mil millones de visualizaciones.</p>
                     </div>
@@ -265,33 +316,33 @@
         <!-- Slide 5: Visualización de datos -->
         <div id="slide5" class="slide">
             <div class="slide-content flex flex-col items-center">
-                <h2 class="text-4xl text-blue-600 mb-6 text-center">Visualización de datos</h2>
+                <h2 class="text-4xl mb-6 text-center">Visualización de datos</h2>
                 <div class="data-vis">
                     <div class="data-bar-container">
                         <div class="data-bar-label">Usuarios Redes Sociales</div>
                         <div class="data-bar">
-                            <div class="data-bar-fill bg-blue-500" style="width: 80%;"></div>
+                            <div class="data-bar-fill" style="width: 80%;"></div>
                             <span class="data-bar-text">36.8 M (69.2% pob.)</span>
                         </div>
                     </div>
                     <div class="data-bar-container">
                         <div class="data-bar-label">Inversión 2025</div>
                         <div class="data-bar">
-                            <div class="data-bar-fill bg-green-500" style="width: 70%;"></div>
+                            <div class="data-bar-fill" style="width: 70%;"></div>
                             <span class="data-bar-text">+$74.6 M USD</span>
                         </div>
                     </div>
                     <div class="data-bar-container">
                         <div class="data-bar-label">Creadores en Colombia</div>
                         <div class="data-bar">
-                            <div class="data-bar-fill bg-yellow-500" style="width: 90%;"></div>
+                            <div class="data-bar-fill" style="width: 90%;"></div>
                             <span class="data-bar-text">645,000 creadores</span>
                         </div>
                     </div>
                 </div>
                 <div class="mt-8">
-                    <p class="font-semibold text-center text-lg">Casos de éxito:</p>
-                    <ul class="flex justify-center gap-6 mt-2 text-blue-600 font-bold">
+                    <p class="font-bold text-center text-lg text-gray-300">Casos de éxito:</p>
+                    <ul class="flex justify-center flex-wrap gap-6 mt-2 font-bold text-gray-400">
                         <li>Julioprofe</li>
                         <li>Ami Rodríguez</li>
                         <li>El Borrego</li>
@@ -303,15 +354,15 @@
         <!-- Slide 6: Cierre -->
         <div id="slide6" class="slide">
             <div class="slide-content text-center max-w-2xl mx-auto">
-                <h2 class="text-4xl text-blue-600">Cierre</h2>
-                <div class="p-6 bg-blue-50 border border-blue-200 rounded-xl">
-                    <p class="text-2xl font-bold italic text-blue-800 leading-relaxed">
+                <h2 class="text-4xl">Cierre</h2>
+                <div class="p-6 bg-purple-900 bg-opacity-30 border border-purple-500 rounded-xl">
+                    <p class="text-2xl font-bold italic text-white leading-relaxed">
                         “Nuestros estudiantes ya no solo quieren consumir contenido, quieren crearlo. Y en Colombia ya hay miles que lo lograron. Como docentes, podemos ser el puente entre la pasión y la profesionalización.”
                     </p>
                 </div>
                 <div class="mt-8">
-                    <p class="font-bold text-xl text-gray-700">Llamado a la acción:</p>
-                    <p class="mt-2 text-lg text-gray-600">Abrir espacios de orientación vocacional donde estas profesiones se reconozcan como posibles y se guíen con responsabilidad.</p>
+                    <p class="font-bold text-xl text-gray-300">Llamado a la acción:</p>
+                    <p class="mt-2 text-lg text-gray-400">Abrir espacios de orientación vocacional donde estas profesiones se reconozcan como posibles y se guíen con responsabilidad.</p>
                 </div>
             </div>
         </div>
@@ -322,12 +373,22 @@
         </div>
     </div>
 
+    <!-- Modal para el mensaje de finalización -->
+    <div id="endModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 class="text-2xl font-bold mb-4">¡Presentación terminada!</h3>
+            <p>Has llegado al final de la presentación. Esperamos que la información haya sido útil.</p>
+            <button onclick="document.getElementById('endModal').style.display='none'" class="mt-4 px-6 py-2 bg-blue-600 rounded-full font-bold text-white">Cerrar</button>
+        </div>
+    </div>
+
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
+        const endModal = document.getElementById('endModal');
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
@@ -337,7 +398,15 @@
                 }
             });
             prevBtn.style.display = index === 0 ? 'none' : 'block';
-            nextBtn.textContent = index === totalSlides - 1 ? 'Finalizar' : 'Siguiente';
+            if (index === totalSlides - 1) {
+                nextBtn.textContent = 'Finalizar';
+                nextBtn.classList.add('bg-purple-600', 'hover:bg-purple-700');
+                nextBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+            } else {
+                nextBtn.textContent = 'Siguiente';
+                nextBtn.classList.remove('bg-purple-600', 'hover:bg-purple-700');
+                nextBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+            }
         }
 
         nextBtn.addEventListener('click', () => {
@@ -345,7 +414,7 @@
                 currentSlide++;
                 showSlide(currentSlide);
             } else {
-                alert("¡Has llegado al final de la presentación!");
+                endModal.style.display = 'flex';
             }
         });
 
